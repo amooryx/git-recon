@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./banner.svg" alt="git-recon" width="800">
+</div>
+
 # Git Recon
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
