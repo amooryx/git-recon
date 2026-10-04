@@ -7,21 +7,31 @@
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-> **GitHub intelligence gatherer — org recon, secret scanning via code search, and member enumeration.**
+> **Local, read-only check for likely secret-bearing filenames committed to a Git repository.**
 
 ## Usage
 
 ```bash
-# Org recon (repos, members)
-python git_recon.py --token $GITHUB_TOKEN org target-org --out org.json
+# Inspect the current repository
+python git_recon.py .
 
-# Search for secrets in a GitHub org
-python git_recon.py --token $GITHUB_TOKEN search "org:target-org password filename:.env"
+# Inspect another local repository and save findings as JSON
+python git_recon.py C:\projects\my-repo --yes --output findings.json
+
+# Run the tests
+python -m unittest discover -s tests
 ```
+
+The check reads the local Git index and reports tracked `.env`-style files and
+likely private-key or keystore filenames. It does not read file contents, make
+network requests, or inspect untracked files. Example/template environment
+files are excluded. Findings are filename-based indicators and should be
+reviewed before taking action.
 
 ## Disclaimer
 
-> **Authorized security testing only.** Requires a GitHub token. Only search orgs you have written authorization to test.
+This tool operates only on a local repository path supplied by the user. It
+does not accept remote targets or require credentials.
 
 ## Author
 
