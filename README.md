@@ -23,15 +23,15 @@ python -m unittest discover -s tests
 ```
 
 The check reads the local Git index and reports tracked `.env`-style files and
-likely private-key or keystore filenames. It does not read file contents, make
-network requests, or inspect untracked files. URL and UNC network targets are
-rejected, as are mapped Windows network drives. Network-mounted paths that an
-operating system presents as ordinary local paths cannot be identified
-portably; only supply a local repository. Git index reads are streamed and
-bounded to 16 MiB, 100,000 tracked paths, and 30 seconds; exceeding a limit
-fails the scan with an error rather than reporting partial results as complete.
-Example/template environment files are excluded. Findings are filename-based
-indicators and should be reviewed before taking action.
+likely private-key or keystore filenames. The scanner does not read file
+contents or inspect untracked files. URL and UNC network targets are rejected,
+as are mapped Windows network drives. Network-mounted paths that an operating
+system presents as ordinary local paths cannot be identified portably, and Git
+may access that storage; only supply a local repository. Git index reads are
+streamed and bounded to 16 MiB, 100,000 tracked paths, and 30 seconds; exceeding
+a limit fails the scan with an error rather than reporting partial results as
+complete. Example/template environment files are excluded. Findings are
+filename-based indicators and should be reviewed before taking action.
 
 The shared runtime asks for local authorization confirmation by default; use
 `--yes` to skip that prompt for this read-only local scan.
